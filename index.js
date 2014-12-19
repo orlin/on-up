@@ -10,6 +10,7 @@ module.exports = function(opts, cb) {
   var cfg, track;
   cfg = {
     req: {
+      uri: "/",
       timeout: 1000
     },
     spacings: 240,
@@ -17,6 +18,9 @@ module.exports = function(opts, cb) {
     dots: false
   };
   merge(cfg, opts);
+  if (cfg.req.uri[0] === '/') {
+    cfg.req.uri = "http://localhost:80" + cfg.req.uri;
+  }
   track = {
     retries: 0,
     duration: cfg.patience
